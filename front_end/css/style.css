@@ -1,0 +1,444 @@
+*{
+    box-sizing: border-box;
+}
+.wrap-content{
+    width: 100%;
+    overflow: hidden;
+}
+body{
+    font-family: 'Roboto',sans-serif ;
+}
+.top-header{
+  
+    background-color: #2a3e41;
+}
+.topbar{
+    height: 30px;
+}
+.topbar a{
+    display: inline-block;
+    margin: 0 8px;
+}
+.topbar .icon-1{
+    background: url("../image1/icon-1.png") no-repeat;
+    width: 12px;
+    height: 16px;
+}
+.topbar .icon-2{
+    background: url("../image1/icon-2.png") no-repeat;
+    width: 15px;
+    height: 14px;
+}
+.topbar .icon-3{
+    background: url("../image1/icon-3.png") no-repeat;
+    width: 14px;
+    height: 11px;
+}
+.topbar .icon-4{
+    background: url("../image1/icon-4.png") no-repeat;
+    width: 7px;
+    height: 12px;
+}
+.topbar .icon-5{
+    background: url("../image1/icon-5.png") no-repeat;
+    width: 15px;
+    height: 12px;
+}
+.topbar .icon-6{
+    background: url("../image1/icon-6.png") no-repeat;
+    width: 13px;
+    height: 12px;
+}
+.topbar .icon-7{
+    background: url("../image1/icon-7.png") no-repeat;
+    width: 13px;
+    height: 12px;
+}
+.topbar .no-padding{
+    margin: 0;
+}
+.logo{
+    display: block;
+  
+}
+.main-header{
+    height:151px;
+}
+.box-banner{
+    background-color: #557c83;
+    background-image: linear-gradient(180deg, rgb(108, 176, 209), #086271);
+    
+  
+    
+}
+.inner-banner{
+   
+    width: 100%;
+    height: 100%;
+    
+  
+}
+.banner{
+    width: 100%;
+}
+.box-menu{
+    background-image: linear-gradient(178deg, #23e7d9, #25396c);
+    border-bottom: 1px solid #cccccc;
+}
+.btn-search{
+    background-color: #fff;
+}
+.btn-search:hover{
+    background-color: rgb(19, 130, 175);
+}
+
+.menu-list li a{
+    
+    color:#5b5150;
+    text-decoration: none;
+    font-size: 14pt;
+   
+   
+}
+.menu-list li{
+    list-style: none;
+    display: inline-flex;
+
+}
+.box-menu .navbar-nav li.active,  .navbar-nav li:hover{
+    border-bottom: 5px solid #07e09f;
+}
+
+.title-news{
+    background-image: linear-gradient(180deg, rgb(108, 176, 209), #086271);
+    background-color: #557c83;
+    height:40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color:#ffffff;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.news{
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 30px;
+    padding-bottom:30px;
+}
+.infor-news .title a{
+    text-decoration: none;
+    color: #333333;
+    font-size: 20pt;
+    padding: 0;
+}
+.infor-news .infor-detail{
+    color:#999999;
+}
+.infor-detail .date{
+    margin-right: 15px;
+ }
+ 
+ .infor-detail .comment:before{
+   content: " ";
+   display: inline-block;
+   background: url("../image1/icon-comment.png") no-repeat;
+   margin-right: 10px;
+   width: 10px;
+   height: 10px;
+ 
+ }
+ .infor-detail .like:before{
+     content: '';
+     display: inline-block;
+     background: url("../image1/eye-solid.svg") no-repeat;
+     width: 10px;
+     height: 9px;
+     margin-right: 5px;
+     margin-left: 9px;
+ }
+ .infor-news .description-news{
+     color: #666666;
+     font-size: 13pt;
+ }
+ .hash-tag a{
+     text-decoration: none;
+     font-size: 13pt;
+     color: #60c6c1;
+ }
+ .paging-news{
+     margin-top: 52px;
+    
+ }
+.paging-news li{
+    list-style: none;
+    margin-right: 10px;
+}
+.paging-news li a{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background-color: #999999;
+    color: #666666;
+    font-size: 24pt;
+    text-decoration: none;
+
+}
+.paging-news li .active{
+    background-color: #2bbfd9;
+    color: #ffffff;
+}
+.paging-news li a:hover{ 
+    background-color: #1cc1df;
+    color:rgb(255, 255, 255);
+}
+ .box-slide{
+    
+    width: 100%;
+    height: 227px;
+    position: relative;
+}
+.box-slide img{
+    width: 100%;
+}
+.button-prev{
+    position: absolute;
+    width:32px;
+    height: 42px;
+    background-color: #7a7473;
+    top:75px;
+    left:12px;
+  
+}
+.button-next{
+    position: absolute;
+    width:32px;
+    height: 42px;
+    background-color: #7a7473;
+    top:75px;
+    right:12px;
+}
+
+.des-slide{
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    background-color: #60bab596;
+    color:#ffffff;
+    font: 14pt;
+    display: flex;
+    align-items: center;
+    padding-left: 19px;
+    left:0;
+    bottom: 0;
+}
+.box-video{
+    position: relative;
+    
+}
+.box-video img{
+    width: 100%;
+}
+.box-video .button-play{
+    display:flex;
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;/* lam tron cai nut*/
+    top: 73px;
+    left: 163px;
+    border: none;
+
+}
+.box-video .button-play:focus{
+    outline:none; /*phac thao xung quanh phan tu*/
+
+}
+.box-video .button-play:before{
+    background: url("../image1/icon-play-1.png");
+    content:'';
+    display: block;
+    width: 18px;
+    height: 22px;
+}
+.ads img{
+    width: 100%;
+    margin: 30px 0;
+}
+.box-news-right{
+    border: 1px solid #666666;
+}
+.box-news-right .top-title{
+    height: 50px;
+    background-image: linear-gradient(180deg, rgb(108, 176, 209), #086271);
+    background-color: #557c83;
+    
+    display: flex;
+    align-items: center;
+    padding:0;
+}
+
+.box-news-right .top-title a{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 0 16px;
+    font-size: 14px;
+    height: 100%;
+    
+    align-items: center;
+}
+.top-title ul{
+    text-align: center;
+    width: 100%;
+    line-height:50px;
+}
+.top-title li{
+    width: 33.333%;
+    height:100%
+}
+
+.box-news-right .top-title a.active, .box-news-right a:hover{
+    background-color: #3aafa9;
+}
+.box-news-right .lst-content .item-content{
+    display: flex;
+}
+.item-content .number{
+    margin-right:18px;
+    padding-left:12px;
+}
+.twister img{
+    width: 100%;
+}
+.tag .content-tag{
+    border: 2px solid #159788;
+    
+}
+.content-tag a{
+    border: 1px solid #cccccc;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin:5px 10px 10px 0;
+    color: #8d8d8d;
+}
+.content-tag a:hover{
+    background-color: #3aafa9;
+    color:#ffffff;
+}
+.ads-bottom{
+    display: block;
+    margin: 50px 0;
+}
+.ads-bottom img{
+    width: 100%;
+}
+.footer-top{
+    background-image: linear-gradient(180deg, rgb(108, 176, 209), #086271);
+    background-color: #557c83;
+    padding:40px 0;
+}
+.item-footer h4{
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 39px;
+}
+.item-footer h4::before{
+    content:'';
+    display:block;
+    width: 70px;
+    height: 3px;
+    background-color: #4ce5de;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+.item-footer .item-ft{
+    border-bottom: 1px solid #4d666f;
+    padding: 15px 0;
+    color:#ffffff;
+}
+.footer-bottom{
+    background-image: linear-gradient(90deg, #21324a, #111727);
+    background-color: #2a3e41;
+
+}
+.footer-bottom p{
+    color: #a1b1bc;
+    font-size: 15px;
+}
+.footer-bottom p a{
+    color:#317876;
+    text-decoration: none;
+}
+.main-ft-bot{
+    padding: 45px 0;;
+}
+
+
+
+/* Chỉnh cho cái thời tiết
+ */
+
+ .weather-block {
+    display: block;
+    line-height: 1;
+    padding: 10px;
+    border: 2px solid #2bc2bd;
+    clear: both;
+    background-size: 45px;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+ }
+ .weather-result {
+    display: inline-block;
+    width: 100%;
+}
+.w-list-cities {
+    float: left;
+    border: 0;
+    background: 0;
+    font-weight: 700;
+    font-size: 16px;
+    width: 80px;
+    margin-right: 10px;
+}
+.w-temperature {
+    font-size: 16px;
+    color: #111;
+    float: left;
+    margin-top: 9px;
+    margin-left: 46px;
+}
+.w-temperature #minMax{
+    font-size: 12px;
+    color: #ada7a7;
+}
+/* back to top button */
+#top-up {
+    font-size: 3rem;
+    cursor: pointer;
+    position: fixed;
+    z-index: 9999;
+    color:#0ce1d0;
+    bottom: 20px;
+    right: 15px;
+    display: none;
+}
+#top-up:hover {
+    color: rgb(11, 14, 112)
+}
+/* chỉnh thanh navbar khi cuộn chuột xuống thì position fixed */
+.sticky{
+    position: fixed;
+    z-index: 213;
+    top: 0;
+}
