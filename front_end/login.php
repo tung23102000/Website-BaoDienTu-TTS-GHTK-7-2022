@@ -67,7 +67,7 @@
         <script>
         swal({
             title: "Đăng nhập thất bại!",
-            text: "Sai thông tin đăng nhập!",
+            text: "Vui lòng nhập đầy đủ các trường!",
             icon: "error",
             button: "Ok",
         });
