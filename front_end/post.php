@@ -162,7 +162,7 @@
 
         </div>
 
-        <?php include "include/sidebar.php"; ?>
+        <?php include "include/sidebarAJAX.php"; ?>
 
     </div>
     <!-- /.row -->
