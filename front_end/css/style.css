@@ -293,6 +293,16 @@ body{
     
     align-items: center;
 }
+.box-news-right .top-title{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    /* padding: 0 16px; */
+    font-size: 14px;
+    height: 100%;
+    
+    align-items: center;
+}
 .top-title ul{
     text-align: center;
     width: 100%;
@@ -302,8 +312,13 @@ body{
     width: 33.333%;
     height:100%
 }
-
+.active-click{
+    background-color: #3aafa9;
+}
 .box-news-right .top-title a.active, .box-news-right a:hover{
+    background-color: #3aafa9;
+}
+.box-news-right .top-title li.active, .box-news-right li:hover{
     background-color: #3aafa9;
 }
 .box-news-right .lst-content .item-content{

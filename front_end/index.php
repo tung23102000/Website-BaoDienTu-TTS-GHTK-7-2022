@@ -100,7 +100,8 @@
                 ?>
             </ul>
         </div>
-        <?php include 'include/sidebar.php'; ?>
+        <?php //include 'include/sidebar.php'; ?>
+        <?php include 'include/sidebarAJAX.php'; ?>
 
 
         
