@@ -1,3 +1,5 @@
+<?php //header("X-Frame-Options: DENY");
+//header("Content-Security-Policy: frame-ancestors 'none'", false);?>
 <?php session_start(); ?>
 <?php include '../database/dbhelper.php'; ?>
 <!DOCTYPE html>
@@ -7,11 +9,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://apis.google.com"> -->
+    <!-- ngăn JavaScript nội tuyến thực thi-->
     <title>Inforword</title>
-
-
-
-    
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- jQuery library -->
@@ -69,8 +69,10 @@
                                           ?>
                                         <li><a class="dropdown-item no-padding" href="./addPostFromClient.php?id=<?php echo $id; ?>"><i class="fa-solid fa-plus" style="margin-right: 8px;"></i> Thêm bài viết</a></li>
                                         <?php } ?>
+                                        <li><a class="dropdown-item no-padding" href="./editProfileMoreSecurity.php?id=<?php echo $_SESSION["user_id"]; ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin AT</a></li>
                                         <li><a class="dropdown-item no-padding" href="./editProfile.php?id=<?php echo $id; ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin</a></li>
                                         <li><a class="dropdown-item no-padding" href="./changePassword.php?id=<?php echo $id; ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./changePasswordMoreSecurity.php?id=<?php echo $id; ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu AT</a></li>
                                         <li><a class="dropdown-item no-padding" href="./logout.php"><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i> Đăng xuất</a></li>
                                     </ul>
                                 </div>

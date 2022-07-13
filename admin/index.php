@@ -1,5 +1,26 @@
 <?php include 'include/admin_header.php'; ?>
-
+<?php  
+if(!isset($_SESSION['username']) && !isset($_SESSION['user_role'])){
+    http_response_code(404);
+    header("HTTP/1.1 404 Not Found");
+    exit;
+   
+} else{
+   
+    if($_SESSION['user_role']!="admin"){
+        echo '
+        <script>
+        swal({
+            title: "Truy cập thất bại!",
+            text: "Bạn không có quyền truy cập!",
+            icon: "error",
+            button: "Ok",
+        });
+        </script>';
+    }
+    else{
+  ?>
+ 
 <div id="wrapper">
 
     <?php include 'include/admin_navigation.php'; ?>
@@ -223,3 +244,4 @@
     <!-- /#page-wrapper -->
 
     <?php include 'include/admin_footer.php'; ?>
+    <?php } } ?>
