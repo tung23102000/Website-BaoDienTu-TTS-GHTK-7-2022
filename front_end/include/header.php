@@ -69,10 +69,10 @@ header("Content-Security-Policy: frame-ancestors 'none'", false);?>
                                           ?>
                                         <li><a class="dropdown-item no-padding" href="./addPostFromClient.php?id=<?php echo htmlspecialchars($id); ?>"><i class="fa-solid fa-plus" style="margin-right: 8px;"></i> Thêm bài viết</a></li>
                                         <?php } ?>
-                                        <li><a class="dropdown-item no-padding" href="./editProfileMoreSecurity.php?id=<?php echo htmlspecialchars($_SESSION["user_id"]); ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin AT</a></li>
-                                        <li><a class="dropdown-item no-padding" href="./editProfile.php?id=<?php echo htmlspecialchars($id); ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin</a></li>
-                                        <li><a class="dropdown-item no-padding" href="./changePassword.php?id=<?php echo htmlspecialchars($id); ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu</a></li>
-                                        <li><a class="dropdown-item no-padding" href="./changePasswordMoreSecurity.php?id=<?php echo htmlspecialchars($id); ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu AT</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./editProfileMoreSecurity.php?id=<?php echo htmlspecialchars($_SESSION["user_id"]); ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin</a></li>
+                                        <!-- <li><a class="dropdown-item no-padding" href="./editProfile.php?id=<?php echo htmlspecialchars($id); ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./changePassword.php?id=<?php echo htmlspecialchars($id); ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu</a></li> -->
+                                        <li><a class="dropdown-item no-padding" href="./changePasswordMoreSecurity.php?id=<?php echo htmlspecialchars($id); ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu</a></li>
                                         <li><a class="dropdown-item no-padding" href="./logout.php"><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i> Đăng xuất</a></li>
                                     </ul>
                                 </div>
@@ -97,6 +97,8 @@ header("Content-Security-Policy: frame-ancestors 'none'", false);?>
                 <div class="container inner-banner">
                     <div class="row align-items-center" style="height:100%;">
                         <div class="col-12 col-lg-4">
+                        <!-- <a href="index.php" class="logo"> -->
+                            <!-- thay vì viết index.php do ta đã thay ở trong .htaccess nên chỉ cần index ho thôi -->
                             <a href="index.php" class="logo">
                                 <img src="image1/logo.png" />
                             </a>

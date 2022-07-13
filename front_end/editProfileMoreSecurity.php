@@ -45,7 +45,7 @@ $allowUpload   = true;
 $maxfilesize   = 800000;
 
 ////Những loại file được phép upload
-$allowtypes    = array('jpg', 'png', 'jpeg', 'gif');
+$allowtypes    = array('jpg', 'png', 'jpeg', 'gif','JPG','PNG','JPEG','GIF');
 $token = md5(uniqid());
 if (isset($_POST['edit_user'])) {
 

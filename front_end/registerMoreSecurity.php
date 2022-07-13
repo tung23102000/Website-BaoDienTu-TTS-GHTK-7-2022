@@ -31,25 +31,25 @@
         $rePassword = $_POST['re-password'];
 
         if (!empty($username) && !empty($password) && !empty($name) && !empty($rePassword)) {
-           
-                $username = mysqli_real_escape_string($connection, $username);
-                $password = mysqli_real_escape_string($connection, $password);
-                $name = mysqli_real_escape_string($connection, $name);
-                $rePassword = mysqli_real_escape_string($connection, $rePassword);
-                $sql = "SELECT * FROM users WHERE username = '$username'";
-                $select_user_query = mysqli_query($connection, $sql);
-                $user_count = mysqli_num_rows($select_user_query);
-                if ($user_count == 0) {
 
-                    if ($password === $rePassword) {
-                        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-                        $query = "INSERT INTO users (username, name, password) VALUES ('{$username}','{$name}',
-            '{$password}')";
-                        $regiser_user_query = mysqli_query($connection, $query);
-                        if (!$regiser_user_query) {
-                            die("Query failed " . mysqli_error($connection));
-                        }
-                        echo '
+            $username = mysqli_real_escape_string($connection, $username);
+            $password = mysqli_real_escape_string($connection, $password);
+            $name = mysqli_real_escape_string($connection, $name);
+            $rePassword = mysqli_real_escape_string($connection, $rePassword);
+            $sql = "SELECT * FROM users WHERE username = '$username'";
+            $select_user_query = mysqli_query($connection, $sql);
+            $user_count = mysqli_num_rows($select_user_query);
+            if ($user_count == 0) {
+
+                if ($password === $rePassword) {
+                    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+                    $query = "INSERT INTO users (username, name, password,user_role) VALUES ('{$username}','{$name}',
+            '{$password}','subcriber')";
+                    $regiser_user_query = mysqli_query($connection, $query);
+                    if (!$regiser_user_query) {
+                        die("Query failed " . mysqli_error($connection));
+                    }
+                    echo '
         <script>
         swal({
             title: "Đăng ký thành công!",
@@ -58,27 +58,27 @@
             button: "Ok",
         });
         </script>';
-                        $sql = "SELECT * FROM users WHERE username = '$username'";
-                        $select_user_query = mysqli_query($connection, $sql);
-                        if (!$select_user_query) {
-                            die("Query failed " . mysqli_error($connection));
-                        }
-                        while ($row = mysqli_fetch_array($select_user_query)) {
-                            $db_user_id = $row['user_id'];
-                            $db_username = $row['username'];
-                            $db_password = $row['password'];
-                            $db_name = $row['name'];
-                            $db_role = $row['user_role'];
-                            $db_image = $row['user_image'];
-                        }
-                        $_SESSION['user_id'] = $db_user_id;
-                        $_SESSION['username'] = $db_username;
-                        $_SESSION['name'] = $db_name;
-                        $_SESSION['user_role'] = $db_role;
-                        $_SESSION['image'] = $db_image;
-                        header('Location: index.php');
-                    } else {
-                        echo '
+                    $sql = "SELECT * FROM users WHERE username = '$username'";
+                    $select_user_query = mysqli_query($connection, $sql);
+                    if (!$select_user_query) {
+                        die("Query failed " . mysqli_error($connection));
+                    }
+                    while ($row = mysqli_fetch_array($select_user_query)) {
+                        $db_user_id = $row['user_id'];
+                        $db_username = $row['username'];
+                        $db_password = $row['password'];
+                        $db_name = $row['name'];
+                        $db_role = $row['user_role'];
+                        $db_image = $row['user_image'];
+                    }
+                    $_SESSION['user_id'] = $db_user_id;
+                    $_SESSION['username'] = $db_username;
+                    $_SESSION['name'] = $db_name;
+                    $_SESSION['user_role'] = $db_role;
+                    $_SESSION['image'] = $db_image;
+                    header('Location: index.php');
+                } else {
+                    echo '
         <script>
         swal({
             title: "Vui lòng nhập lại mật khẩu cho khớp!",
@@ -87,9 +87,9 @@
             button: "Ok",
         });
         </script>';
-                    }
-                } else {
-                    echo '
+                }
+            } else {
+                echo '
                 <script>
                 swal({
                     title: "Đã tồn tại username!",
@@ -98,8 +98,7 @@
                     button: "Ok",
                 });
                 </script>';
-                }
-            
+            }
         } else {
 
             echo '

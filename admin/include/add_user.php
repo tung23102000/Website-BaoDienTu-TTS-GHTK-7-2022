@@ -11,24 +11,25 @@ if(isset($_POST['create'])){
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
     $user_address = $_POST['user_address'];
+
     move_uploaded_file($user_image_temp,"../images/{$user_image}");// chuyển từ chỗ tạm thời sang thư mục ảnh ở root
+    $password = password_hash($password,PASSWORD_BCRYPT,array('cost' => 10));
     $sql = 'INSERT INTO users(username,name,user_role,user_image,user_gmail,password,user_address) 
           VALUES("'.$username.'","'.$name.'","'.$user_role.'","'.$user_image.'","'.$user_email.'", "'.$password.'","'.$user_address.'")';
-    $create_user_query= mysqli_query($connection, $sql);   
-   
-    echo "User created successfully: " . " " ."<a href='../users.php'>View Users</a>";
     $query=mysqli_query($connection,$sql);
     if($query){
     echo '
       <script>
        swal({
-           title: "Thêm bài viết thành công!",
+           title: "Thêm người dùng thành công!",
            text: "",
            icon: "success",
            button: "Ok",
        });
        </script>';
     }
+    echo "User created successfully: " . " " ."<a href='../users.php'>View Users</a>";
+    
 }
 
 
