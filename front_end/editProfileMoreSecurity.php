@@ -1,4 +1,5 @@
-<?php include "include/header.php"; ?>
+<?php include "include/header.php";
+include "include/function.php"; ?>
 
 <?php
 if (isset($_GET['id'])) {
@@ -27,15 +28,16 @@ if (isset($_GET['id'])) {
             //     button: "Ok",
             // });
             // </script>';
-          
+
             exit();
         }
     } else {
         exit();
     }
 }
-
 ?>
+
+
 <?php
 //mặc định là được upfile
 $allowUpload   = true;
@@ -45,33 +47,38 @@ $maxfilesize   = 800000;
 ////Những loại file được phép upload
 $allowtypes    = array('jpg', 'png', 'jpeg', 'gif');
 $token = md5(uniqid());
-if (isset($_POST['edit_user']) && $_SESSION['_token'] == $_POST['_token']) {
+if (isset($_POST['edit_user'])) {
 
     $user_fullname      = $_POST['user_fullname'];
     $username         = $_POST['username'];
     $user_email         = $_POST['user_gmail'];
     $user_address     = $_POST['user_address'];
     $user_image        = $_FILES['image']['name'];
-    $imageFileType = pathinfo($user_image, PATHINFO_EXTENSION); //lấy ra phần mở rộng file(đuôi file)
     //echo $imageFileType;
     // echo "Type : " . $_FILES['image']['type'] ."<br>";
     $user_image_temp   = $_FILES['image']['tmp_name']; //File đã upload trong thư mục tạm thời trên Web Server
 
+    if(empty($user_image)){
+        $user_image=getAvatarFromDB($id);
+    } 
     //cần kiểm tra ở kỹ ở thư mục tạm thời trc khi chuyển về thư mục cần lưu trữ
-    $check = getimagesize($user_image_temp);
-    if ($check !== false) {
+  //  $check = getimagesize($user_image_temp);
+    $imageFileType = pathinfo($user_image, PATHINFO_EXTENSION); //lấy ra phần mở rộng file(đuôi file)
+   // echo $imageFileType;
+   // if ($check !== false) {
         $allowUpload = true;
-    } else {
-        echo '
-            <script>
-            swal({
-                title: "Cập nhật avatar thất bại!",
-                text: "Đây không phải file ảnh!",
-                icon: "error",
-                button: "Ok",
-            });
-            </script>';
-        $allowUpload = false;
+  //  } else {
+        // echo '
+        //     <script>
+        //     swal({
+        //         title: "Cập nhật avatar thất bại!",
+        //         text: "Đây không phải file ảnh!",
+        //         icon: "error",
+        //         button: "Ok",
+        //     });
+        //     </script>';
+        //     $user_image=getAvatarFromDB($id);
+        // $allowUpload = false;
         //     }
         //    // Kiểm tra kích thước file upload cho vượt quá giới hạn cho phép
         if ($_FILES["image"]["size"] > $maxfilesize) {
@@ -84,6 +91,7 @@ if (isset($_POST['edit_user']) && $_SESSION['_token'] == $_POST['_token']) {
             button: "Ok",
         });
         </script>';
+            getAvatarFromDB($id);
             $allowUpload = false;
         }
         // Kiểm tra kiểu file
@@ -97,30 +105,33 @@ if (isset($_POST['edit_user']) && $_SESSION['_token'] == $_POST['_token']) {
                 button: "Ok",
             });
             </script>';
+            $user_image=getAvatarFromDB($id);
             $allowUpload = false;
         }
+    //}
+    if ($allowUpload == true) {
+        move_uploaded_file($user_image_temp, "../admin/images/$user_image");
 
-        if ($allowUpload == true) {
-            move_uploaded_file($user_image_temp, "../admin/images/$user_image");
-        
-       // move_uploaded_file($user_image_temp, "../admin/images/$user_image");
+        // move_uploaded_file($user_image_temp, "../admin/images/$user_image");
         if (empty($user_image)) {
             // nếu k có ảnh nào đc chọn tức là k thay đổi ảnh cũ thì phải thực hiện bằng cách lấy ảnh từ db
-            $query = "SELECT * FROM users WHERE user_id = $id ";
-            $select_image = mysqli_query($connection, $query);
+            // $query = "SELECT * FROM users WHERE user_id = $id ";
+            // $select_image = mysqli_query($connection, $query);
 
-            while ($row = mysqli_fetch_array($select_image)) {
+            // while ($row = mysqli_fetch_array($select_image)) {
 
-                $user_image = $row['user_image'];
-            }
+            //     $user_image = $row['user_image'];
+            // }
+
+            $user_image=getAvatarFromDB($id);
         }
         $sql = 'UPDATE users SET 
-   name = "' . $user_fullname . '", 
-   username="' . $username . '", 
-   user_gmail="' . $user_email . '", 
-   user_image="' . $user_image . '",
-   user_address="' . $user_address . '"
-   WHERE user_id="' . $id . '"';
+                name = "' . $user_fullname . '", 
+                username="' . $username . '", 
+                user_gmail="' . $user_email . '", 
+                user_image="' . $user_image . '",
+                user_address="' . $user_address . '"
+                WHERE user_id="' . $id . '"';
         $update_query = mysqli_query($connection, $sql);
         if (!$update_query) {
             die("query failed" . mysqli_error($connection));
@@ -137,7 +148,6 @@ if (isset($_POST['edit_user']) && $_SESSION['_token'] == $_POST['_token']) {
         }
     }
 }
-}
 
 ?>
 <div class="container-fluid">
@@ -152,10 +162,10 @@ if (isset($_POST['edit_user']) && $_SESSION['_token'] == $_POST['_token']) {
                                     <div class="user-avatar">
                                         <?php if (empty($user_image)) {  ?>
                                             <img src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png" alt="Maxwell Admin" style="width: 90px;
-    height: 100px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;">
+                                                                                                                                                                                        height: 100px;
+                                                                                                                                                                                        -webkit-border-radius: 100px;
+                                                                                                                                                                                        -moz-border-radius: 100px;
+                                                                                                                                                                                        border-radius: 100px;">
                                         <?php    } else { ?>
                                             <img src="../admin/images/<?php echo $user_image; ?>" alt="Image" style="width: 100px;
     height: 100px;
@@ -205,10 +215,10 @@ if (isset($_POST['edit_user']) && $_SESSION['_token'] == $_POST['_token']) {
                                 <label for="post_tags">Address</label>
                                 <input type="text" value="<?php echo $user_address; ?>" class="form-control" name="user_address">
                             </div>
-                            <input type="hidden" name="_token" value="<?php echo $token; ?>" />
-                                         <?php
-                                          $_SESSION['_token'] = $token;
-                                         ?>
+                            <!-- <input type="hidden" name="_token" value="<?php echo $token; ?>" /> -->
+                            <?php
+                            //$_SESSION['_token'] = $token;
+                            ?>
                             <div class="form-group">
                                 <div class="row" style="margin-left:0; justify-content:center;">
                                     <input class="btn btn-success" type="submit" name="edit_user" value="Edit User">
