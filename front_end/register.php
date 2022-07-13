@@ -37,8 +37,8 @@
             if ($user_count == 0) {
 
                 if ($password === $rePassword) {
-                    $query = "INSERT INTO users (username, name, password) VALUES ('{$username}','{$name}',
-            '{$password}')";
+                    $query = "INSERT INTO users (username, name, password, user_role) VALUES ('{$username}','{$name}',
+            '{$password}','subcriber')";
                     $regiser_user_query = mysqli_query($connection, $query);
                     if (!$regiser_user_query) {
                         die("Query failed " . mysqli_error($connection));

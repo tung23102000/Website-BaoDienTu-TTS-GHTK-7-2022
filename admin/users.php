@@ -14,13 +14,13 @@
                 <div class="col-lg-12">
                     <h1 class="page-header" style="text-align:center; color:#2a789b; font-size:40px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; border-bottom: 1px solid #FFF;">
                         USERS MANAGEMENT
-                    
+
                     </h1>
 
 
                     <div class="row" style="margin-left: 0; margin-right: 0;">
                         <div class="search" style="float: left; margin-right: 50px;">
-                            
+
                             <form class="form-inline" action="search_user.php" method="post">
                                 <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search..." aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0" name="submit_search" type="submit"><img src="../front_end/image1/icon-search.png" /></button>
@@ -82,20 +82,25 @@
 
                             <?php
                             if (isset($_GET['delete'])) {
-                                $the_user_id = $_GET['delete'];
-                                $sql = "delete from users where user_id = {$the_user_id}";
-                                $delete_query = mysqli_query($connection, $sql);
+                                if (isset($_SESSION['user_role'])) {
+                                    if ($_SESSION['user_role'] == 'admin') {
+                                        $the_user_id = $_GET['delete'];
+                                        $the_user_id = mysqli_real_escape_string($connection,$the_user_id);
+                                        $sql = "delete from users where user_id = {$the_user_id}";
+                                        $delete_query = mysqli_query($connection, $sql);
 
-                                echo '
-                <script>
-                swal({
-                    title: "Xoá thành công!",
-                    text: "",
-                    icon: "success",
-                    button: "Ok",
-                });
-                </script>';
-                                header('Location: users.php');
+                                        echo '
+                                            <script>
+                                            swal({
+                                                title: "Xoá thành công!",
+                                                text: "",
+                                                icon: "success",
+                                                button: "Ok",
+                                            });
+                                            </script>';
+                                        header('Location: users.php');
+                                    }
+                                }
                             }
 
 
@@ -106,19 +111,29 @@
                     </table>
                     <?php
                     if (isset($_GET['change_to_admin'])) {
-                        $the_user_id = $_GET['change_to_admin'];
-                        $sql = "UPDATE users SET user_role='admin' WHERE user_id=$the_user_id";
-                        $change_to_admin_query = mysqli_query($connection, $sql);
+                        if (isset($_SESSION['user_role'])) {
+                            if ($_SESSION['user_role'] == 'admin') {
+                                $the_user_id = $_GET['change_to_admin'];
+                                $the_user_id = mysqli_real_escape_string($connection,$the_user_id);
+                                $sql = "UPDATE users SET user_role='admin' WHERE user_id=$the_user_id";
+                                $change_to_admin_query = mysqli_query($connection, $sql);
 
-                        header("Location: users.php");
+                                header("Location: users.php");
+                            }
+                        }
                     }
 
                     if (isset($_GET['change_to_sub'])) {
-                        $the_user_id = $_GET['change_to_sub'];
-                        $sql = "UPDATE users SET user_role='subcriber' WHERE user_id = $the_user_id";
-                        $change_to_sub_query = mysqli_query($connection, $sql);
+                        if (isset($_SESSION['user_role'])) {
+                            if ($_SESSION['user_role'] == 'admin') {
+                                $the_user_id = $_GET['change_to_sub'];
+                                $the_user_id = mysqli_real_escape_string($connection,$the_user_id);
+                                $sql = "UPDATE users SET user_role='subcriber' WHERE user_id = $the_user_id";
+                                $change_to_sub_query = mysqli_query($connection, $sql);
 
-                        header("Location: users.php");
+                                header("Location: users.php");
+                            }
+                        }
                     }
 
 

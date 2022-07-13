@@ -1,9 +1,16 @@
-<?php include "include/header.php"; ?>
+<?php include "include/header.php";
+include "include/function.php"; ?>
 
 <?php
 if (isset($_SESSION['name'])) {
     $post_author = $_SESSION['name'];
+    //mặc định là được upfile
+    $allowUpload   = true;
+    // Cỡ lớn nhất được upload (bytes)
+    $maxfilesize   = 800000;
 
+    ////Những loại file được phép upload
+    $allowtypes    = array('jpg', 'png', 'jpeg', 'gif','JPG','PNG','JPEG','GIF');
     if (isset($_POST['create'])) {
         $post_title        = $_POST['post_title'];
         $post_image        = $_FILES['image']['name'];
@@ -12,26 +19,55 @@ if (isset($_SESSION['name'])) {
         $post_content      = $_POST['post_content'];
         $post_tag        = $_POST['post_tag'];
         $post_date         = date('H:i d-m-Y');
-        move_uploaded_file($post_image_temp, "../admin/images/{$post_image}"); // chuyển từ chỗ tạm thời sang thư mục ảnh ở root
-        $post_content = strip_tags($post_content);
-        $post_content = mysqli_real_escape_string($connection,$post_content);
-        $sql = "INSERT INTO posts(post_title,post_author,post_image,post_content,post_date,post_tag,post_category_id,post_status) 
-    VALUES('{$post_title}','{$post_author}','{$post_image}','{$post_content}',now(),'{$post_tag}','{$post_category_id}','draft')";
-        mysqli_query($connection, $sql);
-        if(mysqli_query($connection, $sql)){
+        $imageFileType = pathinfo($post_image, PATHINFO_EXTENSION); //lấy ra phần mở rộng file(đuôi file)
+        if ($_FILES["image"]["size"] > $maxfilesize) {
             echo '
             <script>
             swal({
-                title: "Thêm bài viết thành công!",
-                text: "",
-                icon: "success",
+                title: "Cập nhật avatar thất bai!",
+                text: "Upload ảnh vượt quá kích cỡ cho phép!",
+                icon: "error",
                 button: "Ok",
             });
             </script>';
+
+            $allowUpload = false;
+        }
+        // Kiểm tra kiểu file
+        if (!in_array($imageFileType, $allowtypes)) {
+            echo '
+                <script>
+                swal({
+                    title: "Cập nhật avatar thất bại!",
+                    text: "Kiểu file không được phép!",
+                    icon: "error",
+                    button: "Ok",
+                });
+                </script>';
+
+            $allowUpload = false;
+        }
+        if ($allowUpload == true) {
+            move_uploaded_file($post_image_temp, "../admin/images/{$post_image}"); // chuyển từ chỗ tạm thời sang thư mục ảnh ở root
+            $post_content = strip_tags($post_content);
+            $post_content = mysqli_real_escape_string($connection, $post_content);
+            $sql = "INSERT INTO posts(post_title,post_author,post_image,post_content,post_date,post_tag,post_category_id,post_status) 
+            VALUES('{$post_title}','{$post_author}','{$post_image}','{$post_content}',now(),'{$post_tag}','{$post_category_id}','draft')";
+            $query= mysqli_query($connection, $sql);
+            if ($query) {
+                echo '
+                    <script>
+                    swal({
+                        title: "Thêm bài viết thành công!",
+                        text: "",
+                        icon: "success",
+                        button: "Ok",
+                    });
+                    </script>';
+            }
         }
     }
 }
-
 
 ?>
 <div class="container">
