@@ -124,7 +124,7 @@
             <h2 style="    color: #306494;
     font-weight: bold; margin-bottom: 40px;">REGISTER FORM</h2>
 
-            <form class="login-form" action="" method="post">
+            <form class="login-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
 
                     <label for="username" class="sr-only">Your name</label>

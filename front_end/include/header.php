@@ -1,5 +1,5 @@
-<?php //header("X-Frame-Options: DENY");
-//header("Content-Security-Policy: frame-ancestors 'none'", false);?>
+<?php header("X-Frame-Options: DENY");
+header("Content-Security-Policy: frame-ancestors 'none'", false);?>
 <?php session_start(); ?>
 <?php include '../database/dbhelper.php'; ?>
 <!DOCTYPE html>
@@ -67,21 +67,21 @@
                                     <?php      } else{
 
                                           ?>
-                                        <li><a class="dropdown-item no-padding" href="./addPostFromClient.php?id=<?php echo $id; ?>"><i class="fa-solid fa-plus" style="margin-right: 8px;"></i> Thêm bài viết</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./addPostFromClient.php?id=<?php echo htmlspecialchars($id); ?>"><i class="fa-solid fa-plus" style="margin-right: 8px;"></i> Thêm bài viết</a></li>
                                         <?php } ?>
-                                        <li><a class="dropdown-item no-padding" href="./editProfileMoreSecurity.php?id=<?php echo $_SESSION["user_id"]; ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin AT</a></li>
-                                        <li><a class="dropdown-item no-padding" href="./editProfile.php?id=<?php echo $id; ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin</a></li>
-                                        <li><a class="dropdown-item no-padding" href="./changePassword.php?id=<?php echo $id; ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu</a></li>
-                                        <li><a class="dropdown-item no-padding" href="./changePasswordMoreSecurity.php?id=<?php echo $id; ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu AT</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./editProfileMoreSecurity.php?id=<?php echo htmlspecialchars($_SESSION["user_id"]); ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin AT</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./editProfile.php?id=<?php echo htmlspecialchars($id); ?>"><i class="fa-solid fa-pen" style="margin-right: 8px;"></i> Sửa thông tin</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./changePassword.php?id=<?php echo htmlspecialchars($id); ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu</a></li>
+                                        <li><a class="dropdown-item no-padding" href="./changePasswordMoreSecurity.php?id=<?php echo htmlspecialchars($id); ?>"><img src="https://uxwing.com/wp-content/themes/uxwing/download/07-web-app-development/change-password.png" alt="" style="margin-right: 8px; width: 17px; height: 17px;"></img> Đổi mật khẩu AT</a></li>
                                         <li><a class="dropdown-item no-padding" href="./logout.php"><i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i> Đăng xuất</a></li>
                                     </ul>
                                 </div>
 
                             <?php } else { ?>
 
-                                <a href="./register.php" style="text-decoration: none; color: #fff;">Đăng ký</a>
+                                <a href="./registerMoreSecurity.php" style="text-decoration: none; color: #fff;">Đăng ký</a>
                                 |
-                                <a href="./login.php" style="text-decoration: none; color: #fff;">Đăng nhập</a>
+                                <a href="./loginMoreSecurity.php" style="text-decoration: none; color: #fff;">Đăng nhập</a>
                             <?php } ?>
                         </div>
                     </div>

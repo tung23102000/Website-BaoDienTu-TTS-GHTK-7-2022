@@ -13,6 +13,8 @@ if (isset($_SESSION['name'])) {
         $post_tag        = $_POST['post_tag'];
         $post_date         = date('H:i d-m-Y');
         move_uploaded_file($post_image_temp, "../admin/images/{$post_image}"); // chuyển từ chỗ tạm thời sang thư mục ảnh ở root
+        $post_content = strip_tags($post_content);
+        $post_content = mysqli_real_escape_string($connection,$post_content);
         $sql = "INSERT INTO posts(post_title,post_author,post_image,post_content,post_date,post_tag,post_category_id,post_status) 
     VALUES('{$post_title}','{$post_author}','{$post_image}','{$post_content}',now(),'{$post_tag}','{$post_category_id}','draft')";
         mysqli_query($connection, $sql);
@@ -34,7 +36,7 @@ if (isset($_SESSION['name'])) {
 ?>
 <div class="container">
     <h2 class="text-center" style="color: #cc1414; margin-top: 35px; margin-bottom: 40px; font-weight: bold;">Thêm bài viết</h2>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="title" style="color: black; font-weight: bold;">Title</label>

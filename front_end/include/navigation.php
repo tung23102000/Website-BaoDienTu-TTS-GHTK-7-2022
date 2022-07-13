@@ -15,6 +15,7 @@
                 while ($row = mysqli_fetch_array($select_all_categories_query)) {
                     $cat_title = $row['cat_title'];
                     $cat_id = $row['cat_id'];
+                   
                     $category_class = '';
 
                     $contact_class = '';
@@ -26,6 +27,7 @@
                     } else if ($pageName == $contact) {
                         $contact_class = 'active';
                     }
+                    $cat_id= htmlspecialchars($cat_id);
                     echo "<li class='$category_class nav-item mx-1'><a class='nav-link' href='category.php?category={$cat_id}' style='color: #FFF;' font-family: 'Helvetica Neue';>{$cat_title}</a></li>";
                 }
                 ?>

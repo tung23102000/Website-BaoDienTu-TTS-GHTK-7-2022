@@ -1,5 +1,7 @@
 
-<?php include "include/admin_header.php"; ?>
+<?php include "include/admin_header.php"; 
+include "include/function.php";
+?>
 
 <div id="wrapper">
 
@@ -56,7 +58,7 @@
                             <?php
                             if (isset($_POST['submit_search'])) {
                                 $search = $_POST['search']; //name="search" ở trong ô input nhập tìm kiếm
-
+                                filterInput($search);
                                 $sql = "SELECT * FROM posts WHERE post_tag OR post_title LIKE '%$search%'";
                                 $search_post_query = mysqli_query($connection, $sql);
                                 $count = mysqli_num_rows($search_post_query);

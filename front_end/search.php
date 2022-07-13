@@ -1,4 +1,6 @@
-<?php include('include/header.php'); ?>
+<?php include('include/header.php');
+include('include/function.php');
+?>
 <div class="container" style="margin-bottom: 40px;">
 
     <div class="row">
@@ -9,6 +11,7 @@
             <?php
             if (isset($_POST['submit_search'])) {
                 $search = $_POST['search'];
+                filterInput($search);
                 $sql = "SELECT * FROM posts WHERE post_tag OR post_title LIKE '%$search%'";
                 $search_query = mysqli_query($connection, $sql);
                 if (!$search_query) {

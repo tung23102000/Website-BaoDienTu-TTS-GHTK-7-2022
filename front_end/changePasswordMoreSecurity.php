@@ -24,8 +24,8 @@ if (isset($_GET['id'])) {
                 $rePassword = mysqli_real_escape_string($connection,$rePassword);
                 
                 if(password_verify($old_password,$user_password)){
-                    echo password_verify($old_password,$user_password);
-                // if ($old_password === $user_password) {
+                    //echo password_verify($old_password,$user_password);
+                 //if ($old_password === $user_password) {
 
                   
                     if ($rePassword === $new_password) {
@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
                                 <div class="form-wrap">
                                     <h2 style="text-align:center; color:#5495a1;">Change your password</h2>
 
-                                    <form role="form" action="" method="post" id="login-form" autocomplete="off">
+                                    <form role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="login-form" autocomplete="off">
 
                                         <div class="form-group">
                                             <label for="email" class="sr-only">Old password</label>
