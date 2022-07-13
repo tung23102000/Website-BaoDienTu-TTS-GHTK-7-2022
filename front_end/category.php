@@ -35,7 +35,7 @@
             ?>
                         <br>
                         <h2>
-                            <a href="../front_end/post.php?p_id=<?php echo $post_id; ?>" style="text-decoration: none; color: #333333;  font-weight: bold;"><?php echo $post_title; ?></a>
+                            <a href="../front_end/post.php?p_id=<?php echo  htmlspecialchars($post_id); ?>" style="text-decoration: none; color: #333333;  font-weight: bold;"><?php echo $post_title; ?></a>
                         </h2>
                         <p class="lead">
                             by <a href="index.php" style="color: #33333; text-decoration: none;"><?php echo $post_author; ?></a>
@@ -64,7 +64,7 @@
                                                     }
                                                     echo $string; ?></p>
                         <p style="color: #29a887;">#<?php echo $post_tag ?></p>
-                        <a class="btn btn-primary" href="../front_end/post.php?p_id=<?php echo $post_id; ?>">Read More</a>
+                        <a class="btn btn-primary" href="../front_end/post.php?p_id=<?php echo  htmlspecialchars($post_id); ?>">Read More</a>
 
                         <hr>
             <?php  }

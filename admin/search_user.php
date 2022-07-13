@@ -1,4 +1,6 @@
-<?php include "include/admin_header.php"; ?>
+<?php include "include/admin_header.php";
+include "include/function.php";
+?>
 
 <div id="wrapper">
 
@@ -53,6 +55,7 @@
                             <?php
                             if (isset($_POST['submit_search'])) {
                                 $search = $_POST['search'];
+                                filterInput($search);
                                 $sql = "SELECT * FROM users WHERE username OR name LIKE '%$search%'";
                                 $search_user_query = mysqli_query($connection, $sql);
                                 $count = mysqli_num_rows($search_user_query);

@@ -58,31 +58,31 @@ if (isset($_POST['edit_user'])) {
     // echo "Type : " . $_FILES['image']['type'] ."<br>";
     $user_image_temp   = $_FILES['image']['tmp_name']; //File đã upload trong thư mục tạm thời trên Web Server
 
-    if(empty($user_image)){
-        $user_image=getAvatarFromDB($id);
-    } 
+    if (empty($user_image)) {
+        $user_image = getAvatarFromDB($id);
+    }
     //cần kiểm tra ở kỹ ở thư mục tạm thời trc khi chuyển về thư mục cần lưu trữ
-  //  $check = getimagesize($user_image_temp);
+    //  $check = getimagesize($user_image_temp);
     $imageFileType = pathinfo($user_image, PATHINFO_EXTENSION); //lấy ra phần mở rộng file(đuôi file)
-   // echo $imageFileType;
-   // if ($check !== false) {
-        $allowUpload = true;
-  //  } else {
-        // echo '
-        //     <script>
-        //     swal({
-        //         title: "Cập nhật avatar thất bại!",
-        //         text: "Đây không phải file ảnh!",
-        //         icon: "error",
-        //         button: "Ok",
-        //     });
-        //     </script>';
-        //     $user_image=getAvatarFromDB($id);
-        // $allowUpload = false;
-        //     }
-        //    // Kiểm tra kích thước file upload cho vượt quá giới hạn cho phép
-        if ($_FILES["image"]["size"] > $maxfilesize) {
-            echo '
+    // echo $imageFileType;
+    // if ($check !== false) {
+    $allowUpload = true;
+    //  } else {
+    // echo '
+    //     <script>
+    //     swal({
+    //         title: "Cập nhật avatar thất bại!",
+    //         text: "Đây không phải file ảnh!",
+    //         icon: "error",
+    //         button: "Ok",
+    //     });
+    //     </script>';
+    //     $user_image=getAvatarFromDB($id);
+    // $allowUpload = false;
+    //     }
+    //    // Kiểm tra kích thước file upload cho vượt quá giới hạn cho phép
+    if ($_FILES["image"]["size"] > $maxfilesize) {
+        echo '
         <script>
         swal({
             title: "Cập nhật avatar thất bai!",
@@ -91,39 +91,33 @@ if (isset($_POST['edit_user'])) {
             button: "Ok",
         });
         </script>';
-            getAvatarFromDB($id);
-            $allowUpload = false;
-        }
-        // Kiểm tra kiểu file
-        if (!in_array($imageFileType, $allowtypes)) {
-            echo '
+        getAvatarFromDB($id);
+        $allowUpload = false;
+    }
+    // Kiểm tra kiểu file
+    if (!in_array($imageFileType, $allowtypes)) {
+        echo '
             <script>
             swal({
-                title: "Cập nhật avatar thất bai!",
+                title: "Cập nhật avatar thất bại!",
                 text: "Kiểu file không được phép!",
                 icon: "error",
                 button: "Ok",
             });
             </script>';
-            $user_image=getAvatarFromDB($id);
-            $allowUpload = false;
-        }
+        $user_image = getAvatarFromDB($id);
+        $allowUpload = false;
+    }
     //}
     if ($allowUpload == true) {
         move_uploaded_file($user_image_temp, "../admin/images/$user_image");
 
-        // move_uploaded_file($user_image_temp, "../admin/images/$user_image");
+
         if (empty($user_image)) {
             // nếu k có ảnh nào đc chọn tức là k thay đổi ảnh cũ thì phải thực hiện bằng cách lấy ảnh từ db
-            // $query = "SELECT * FROM users WHERE user_id = $id ";
-            // $select_image = mysqli_query($connection, $query);
 
-            // while ($row = mysqli_fetch_array($select_image)) {
 
-            //     $user_image = $row['user_image'];
-            // }
-
-            $user_image=getAvatarFromDB($id);
+            $user_image = getAvatarFromDB($id);
         }
         $sql = 'UPDATE users SET 
                 name = "' . $user_fullname . '", 
@@ -189,7 +183,7 @@ if (isset($_POST['edit_user'])) {
                 <div class="col-6">
                     <div class="form-wrap">
                         <h2 style="text-align:center; color:#5495a1;">Edit Profile</h2>
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="title">Fullname</label>
                                 <input type="text" value="<?php echo $user_fullname; ?>" class="form-control" name="user_fullname" placeholder="Enter your fullname">
@@ -215,9 +209,9 @@ if (isset($_POST['edit_user'])) {
                                 <label for="post_tags">Address</label>
                                 <input type="text" value="<?php echo $user_address; ?>" class="form-control" name="user_address">
                             </div>
-                            <!-- <input type="hidden" name="_token" value="<?php echo $token; ?>" /> -->
+                            <input type="hidden" name="_token" value="<?php echo $token; ?>" />
                             <?php
-                            //$_SESSION['_token'] = $token;
+                            $_SESSION['_token'] = $token;
                             ?>
                             <div class="form-group">
                                 <div class="row" style="margin-left:0; justify-content:center;">

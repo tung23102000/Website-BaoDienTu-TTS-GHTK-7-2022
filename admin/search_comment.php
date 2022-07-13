@@ -1,4 +1,6 @@
-<?php include "include/admin_header.php"; ?>
+<?php include "include/admin_header.php";
+include "include/function.php";
+?>
 
 <div id="wrapper">
 
@@ -48,6 +50,7 @@
                             <?php
                             if (isset($_POST['submit_search'])) {
                                 $search_field = $_POST['search'];
+                                filterInput($search_field);
                                 $search_sql = "SELECT * FROM comments WHERE comment_content LIKE '%$search_field%'";
                                 $selected_comment_query = mysqli_query($connection, $search_sql);
                                 $count = mysqli_num_rows($selected_comment_query);

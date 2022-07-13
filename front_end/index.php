@@ -47,13 +47,13 @@
                     <div class="row news">
 
                         <div class="col-12 col-md-6 pic-news">
-                            <a href="../front_end/post.php?p_id=<?php echo $post_id; ?>" class="img-thumb-news"><img src="../admin/images/<?php echo $post_image; ?> " style="width:100%; " /> </a>
+                            <a href="../front_end/post.php?p_id=<?php echo htmlspecialchars($post_id); ?>" class="img-thumb-news"><img src="../admin/images/<?php echo $post_image; ?> " style="width:100%; " /> </a>
                         </div>
 
                         <div class="col-12 col-md-6 infor-news">
 
 
-                            <h4 class="title" style="font-family: 'Merriweather'; font-weight: bold; "><a href="../front_end/post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a></h4>
+                            <h4 class="title" style="font-family: 'Merriweather'; font-weight: bold; "><a href="../front_end/post.php?p_id=<?php echo htmlspecialchars($post_id); ?>"><?php echo $post_title; ?></a></h4>
                             <div class="infor-detail">
                                 <i class="fa-solid fa-clock"></i>
                                 <span class="date"><?php $date = date_create($post_date);
@@ -79,7 +79,7 @@
                                                             $string = $string . '.';
                                                         }
                                                         echo $string; ?></p>
-                            <div class="hash-tag"><a href="../front_end/post.php?p_id=<?php echo $post_id; ?>"># <?php echo $post_tag; ?></a></div>
+                            <div class="hash-tag"><a href="../front_end/post.php?p_id=<?php echo  htmlspecialchars($post_id); ?>"># <?php echo $post_tag; ?></a></div>
                         </div>
                     </div>
 

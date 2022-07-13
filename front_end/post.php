@@ -1,4 +1,6 @@
-<?php include 'include/header.php'; ?>
+<?php include 'include/header.php'; 
+include 'include/function.php';
+?>
 <!-- Page Content -->
 <div class="container" style="margin-bottom: 40px;">
 
@@ -11,17 +13,17 @@
             if (isset($_GET['p_id'])) {
                 $the_post_id = $_GET['p_id'];
 
-               // $the_post_id = mysqli_real_escape_string($connection,$the_post_id);
-               //$the_post_id = strip_tags($the_post_id);
+               $the_post_id = mysqli_real_escape_string($connection,$the_post_id);
+               $the_post_id = filterInput($the_post_id);
                 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { // nếu ko phải do gửi vào biểu mẫu post ở mục comment thì mới cho tăng biến đếm lượt xem
                     // đơn giản là ta tăng cột lượt xem lên 1 mỗi khi click vào 1 bài cụ thể có id
                     $views_query = "UPDATE posts SET post_view_count= post_view_count+1 where post_id = $the_post_id";
                     $update_views_count = mysqli_query($connection, $views_query);
                    // var_dump($update_views_count);
-                    //if (!$update_views_count) {
-                    //    die("Query failed " . mysqli_error($connection));
-                    //    echo $views_query;
-                    //}
+                    if (!$update_views_count) {
+                       die("Query failed " . mysqli_error($connection));
+                       echo $views_query;
+                    }
                 }
 
                 $sql = "SELECT * FROM posts WHERE post_id = $the_post_id";
@@ -70,8 +72,8 @@
                             if (isset($_SESSION['username'])) { //nếu đã đăng nhập rồi
                                 $the_post_id = $_GET['p_id'];
                                $comment_content = $_POST['comment_content'];
-                                //$comment_content =  strip_tags($_POST['comment_content']);//loại bỏ các thẻ HTML,PHP ở đó
-                                //$comment_content = mysqli_real_escape_string($connection,$comment_content);
+                                $comment_content =  strip_tags($_POST['comment_content']);//loại bỏ các thẻ HTML,PHP ở đó
+                                $comment_content = mysqli_real_escape_string($connection,$comment_content);
                                 if (!empty($comment_content)) {
                                     $sql = 'INSERT INTO comments(comment_post_id, comment_author_id, comment_content, comment_status,
                                 comment_date) VALUES("' . $the_post_id . '","' . $_SESSION['user_id'] . '", "' . $comment_content . '", "unapproved", now())';
@@ -79,9 +81,9 @@
                                 // comment_date) VALUES($the_post_id,'".$_SESSION['user_id']."', '".$comment_content."', 'unapproved', now())";
                                    //echo $sql;
                                     $create_comment_query = mysqli_query($connection, $sql);
-                                    // if (!$create_comment_query) {
-                                    //     die('query fail ' . mysqli_error($connection));
-                                    // }
+                                    if (!$create_comment_query) {
+                                        die('query fail ' . mysqli_error($connection));
+                                    }
                                     // echo $sql."<br>";
                                     // echo $comment_content;
                                     $query = "UPDATE posts SET post_comment_count= post_comment_count+1 where post_id = $the_post_id";
