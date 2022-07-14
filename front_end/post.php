@@ -20,10 +20,10 @@ include 'include/function.php';
                     $views_query = "UPDATE posts SET post_view_count= post_view_count+1 where post_id = $the_post_id";
                     $update_views_count = mysqli_query($connection, $views_query);
                    // var_dump($update_views_count);
-                    if (!$update_views_count) {
-                       die("Query failed " . mysqli_error($connection));
-                       echo $views_query;
-                    }
+                    // if (!$update_views_count) {
+                    //    die("Query failed " . mysqli_error($connection));
+                    //    echo $views_query;
+                    // }
                 }
 
                 $sql = "SELECT * FROM posts WHERE post_id = $the_post_id";
@@ -81,9 +81,9 @@ include 'include/function.php';
                                 // comment_date) VALUES($the_post_id,'".$_SESSION['user_id']."', '".$comment_content."', 'unapproved', now())";
                                    //echo $sql;
                                     $create_comment_query = mysqli_query($connection, $sql);
-                                    if (!$create_comment_query) {
-                                        die('query fail ' . mysqli_error($connection));
-                                    }
+                                    // if (!$create_comment_query) {
+                                    //     die('query fail ' . mysqli_error($connection));
+                                    // }
                                     // echo $sql."<br>";
                                     // echo $comment_content;
                                     $query = "UPDATE posts SET post_comment_count= post_comment_count+1 where post_id = $the_post_id";
