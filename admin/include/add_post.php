@@ -10,10 +10,11 @@ if (isset($_POST['create'])) {
     $post_image_temp   = $_FILES['image']['tmp_name']; //File đã upload trong thư mục tạm thời trên Web Server
     $post_category_id  = filterInput($_POST['post_category']);
     $post_content      = filterInput($_POST['post_content']);
-    $post_author_id        = $_POST['post_author'];
+    $post_author_id        = $_POST['post_author'];//$_POST['post_author'] là cái value(user_id) của  option chọn tác giả
     $sql2 = "SELECT * FROM users WHERE user_id = $post_author_id";
     $select_author_query = mysqli_query($connection, $sql2);
     $row2 = mysqli_fetch_array($select_author_query);
+    // lấy ra tên
     $post_author = $row2['name'];
     $post_tag        = filterInput($_POST['post_tag']);
     $post_date         = date('H:i d-m-Y');

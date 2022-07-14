@@ -14,9 +14,9 @@ include('include/function.php');
                 filterInput($search);
                 $sql = "SELECT * FROM posts WHERE post_tag OR post_title LIKE '%$search%'";
                 $search_query = mysqli_query($connection, $sql);
-                if (!$search_query) {
-                    die("Query fail" . mysqli_error($connection));
-                }
+                // if (!$search_query) {
+                //     die("Query fail" . mysqli_error($connection));
+                // }
                 $count = mysqli_num_rows($search_query);
                 if ($count == 0) {
                     echo "<h1>NO RESULT</h1>";

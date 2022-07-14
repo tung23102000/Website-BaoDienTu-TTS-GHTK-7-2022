@@ -1,4 +1,5 @@
-<?php include "include/header.php";
+<?php  ob_start();
+include "include/header.php";
 include "include/function.php"; ?>
 
 <?php
@@ -28,13 +29,24 @@ if (isset($_GET['id'])) {
             //     button: "Ok",
             // });
             // </script>';
-
+        
+           
+            header('HTTP/1.0 404 Not Found');
+            readFile('../error/404.php');
             exit();
         }
     } else {
-        exit();
+       
+        header('HTTP/1.0 404 Not Found');
+    readFile('../error/404.php');
+    exit();
     }
+} else{
+    header('HTTP/1.0 404 Not Found');
+    readFile('../error/404.php');
+    exit();
 }
+
 ?>
 
 
@@ -57,7 +69,7 @@ if (isset($_POST['edit_user'])) {
     //echo $imageFileType;
     // echo "Type : " . $_FILES['image']['type'] ."<br>";
     $user_image_temp   = $_FILES['image']['tmp_name']; //File đã upload trong thư mục tạm thời trên Web Server
-
+  //var_dump($user_image_temp);
     if (empty($user_image)) {
         $user_image = getAvatarFromDB($id);
     }
