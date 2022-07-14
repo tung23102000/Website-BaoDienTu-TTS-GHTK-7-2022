@@ -71,9 +71,9 @@ include 'include/function.php';
                         if (isset($_POST['create_comment'])) {
                             if (isset($_SESSION['username'])) { //nếu đã đăng nhập rồi
                                 $the_post_id = $_GET['p_id'];
-                               $comment_content = $_POST['comment_content'];
-                                $comment_content =  strip_tags($_POST['comment_content']);//loại bỏ các thẻ HTML,PHP ở đó
-                                $comment_content = mysqli_real_escape_string($connection,$comment_content);
+                               $comment_content = filterInput($_POST['comment_content']);
+                                // $comment_content =  strip_tags($_POST['comment_content']);//loại bỏ các thẻ HTML,PHP ở đó
+                                // $comment_content = mysqli_real_escape_string($connection,$comment_content);
                                 if (!empty($comment_content)) {
                                     $sql = 'INSERT INTO comments(comment_post_id, comment_author_id, comment_content, comment_status,
                                 comment_date) VALUES("' . $the_post_id . '","' . $_SESSION['user_id'] . '", "' . $comment_content . '", "unapproved", now())';
