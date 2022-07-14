@@ -12,12 +12,13 @@ if (isset($_SESSION['name'])) {
     ////Những loại file được phép upload
     $allowtypes    = array('jpg', 'png', 'jpeg', 'gif','JPG','PNG','JPEG','GIF');
     if (isset($_POST['create'])) {
-        $post_title        = $_POST['post_title'];
+        $post_title        = filterInput($_POST['post_title']);
         $post_image        = $_FILES['image']['name'];
         $post_image_temp   = $_FILES['image']['tmp_name']; //File đã upload trong thư mục tạm thời trên Web Server
         $post_category_id  = $_POST['post_category'];
         $post_content      = $_POST['post_content'];
-        $post_tag        = $_POST['post_tag'];
+        
+        $post_tag        = filterInput($_POST['post_tag']);
         $post_date         = date('H:i d-m-Y');
         $imageFileType = pathinfo($post_image, PATHINFO_EXTENSION); //lấy ra phần mở rộng file(đuôi file)
         if ($_FILES["image"]["size"] > $maxfilesize) {
@@ -49,8 +50,9 @@ if (isset($_SESSION['name'])) {
         }
         if ($allowUpload == true) {
             move_uploaded_file($post_image_temp, "../admin/images/{$post_image}"); // chuyển từ chỗ tạm thời sang thư mục ảnh ở root
-            $post_content = strip_tags($post_content);
-            $post_content = mysqli_real_escape_string($connection, $post_content);
+            // $post_content = strip_tags($post_content);
+             $post_content = mysqli_real_escape_string($connection, $post_content);
+            $post_content = htmlspecialchars($post_content);
             $sql = "INSERT INTO posts(post_title,post_author,post_image,post_content,post_date,post_tag,post_category_id,post_status) 
             VALUES('{$post_title}','{$post_author}','{$post_image}','{$post_content}',now(),'{$post_tag}','{$post_category_id}','draft')";
             $query= mysqli_query($connection, $sql);

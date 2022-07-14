@@ -1,5 +1,7 @@
 <?php include "header.php"; ?>
-<?php include "../../database/dbhelper.php";  ?>
+<?php include "../../database/dbhelper.php";  
+include "function.php";
+?>
 
 <?php
 if (isset($_GET['id'])) {
@@ -16,20 +18,33 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)) {
     $post_image = $row['post_image'];
     $post_content = $row['post_content'];
     $post_tag = $row['post_tag'];
-
     $post_date = $row['post_date'];
+    $sql2 = "SELECT * FROM users WHERE name = '$post_author'";
+   
+    $select_author_query = mysqli_query($connection, $sql2);
+    $row2 = mysqli_fetch_assoc($select_author_query);
+    // lấy ra tên
+    $post_author_id = $row2['user_id'];
+  
 }
 
 
 if (isset($_POST['update_post'])) {
-    $post_author = $_POST['post_author'];
-    $post_title = $_POST['post_title'];
+    $post_author_id = $_POST['post_author'];
+    $sql2 = "SELECT * FROM users WHERE user_id = $post_author_id";
+    $select_author_query = mysqli_query($connection, $sql2);
+    $row2 = mysqli_fetch_array($select_author_query);
+    // lấy ra tên
+    $post_author = $row2['name'];
+    $post_title = filterInput($_POST['post_title']);
     $post_category_id = $_POST['post_category'];
     $post_status= $_POST['post_status'];
     $post_image        = $_FILES['image']['name'];
     $post_image_temp   = $_FILES['image']['tmp_name']; //File đã upload trong thư mục tạm thời trên Web Server
-    $post_tag         = $_POST['post_tag'];
+    $post_tag         = filterInput($_POST['post_tag']);
     $post_content      = $_POST['post_content'];
+    $post_content = mysqli_real_escape_string($connection, $post_content);
+    $post_content = htmlspecialchars($post_content);
     move_uploaded_file($post_image_temp, "../images/$post_image");
     if (empty($post_image)) {
         // nếu k có ảnh nào đc chọn tức là k thay đổi ảnh cũ thì phải thực hiện bằng cách lấy ảnh từ db
@@ -55,6 +70,17 @@ if (isset($_POST['update_post'])) {
     if (!$update_query) {
         die("query failed" . mysqli_error($connection));
     }
+    else{
+        echo '
+        <script>
+         swal({
+             title: "Sửa bài viết thành công!",
+             text: "",
+             icon: "success",
+             button: "Ok",
+         });
+         </script>';
+     }
     echo "<p class='bg-success'>Post Updated. <a href='../../front_end/post.php?p_id={$the_post_id}'>View post</a></p>";
 }
 
@@ -93,7 +119,25 @@ if (isset($_POST['update_post'])) {
 
         <div class="form-group">
             <label for="title" style="color: black; font-weight: bold;">Post Author</label>
-            <input value="<?php echo $post_author; ?>" type="text" class="form-control" name="post_author">
+            <!-- <input value="<?php //echo $post_author; ?>" type="text" class="form-control" name="post_author"> -->
+            <select name="post_author" id="">
+                <?php
+                $sql = "SELECT * FROM users";
+                $select_users = mysqli_query($connection, $sql);
+
+                while ($row = mysqli_fetch_assoc($select_users)) {
+                    $user_id = $row['user_id'];
+                    $name = $row['name']; 
+                   
+                    if ($user_id == $post_author_id) { 
+                        echo "<option selected value='{$user_id}'>{$name}</option>";
+                    } else {
+
+                        echo "<option value='{$user_id}'>{$name}</option>";
+                    }
+                }
+                ?>
+            </select>
         </div>
 
 

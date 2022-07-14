@@ -1,19 +1,18 @@
 <?php  include "header.php"; ?>
-<?php include "../../database/dbhelper.php";  ?>
+<?php include "../../database/dbhelper.php"; include "function.php"; ?>
 
 <?php 
 if(isset($_POST['create'])){
-    $username = $_POST['username'];
-    $name = $_POST['name'];
-    $password = $_POST['password'];
+    $username = filterInput($_POST['username']);
+    $name = filterInput($_POST['name']);
+    $password = filterInput($_POST['password']);
     $user_image        = $_FILES['image']['name'];
     $user_image_temp   = $_FILES['image']['tmp_name'];//File đã upload trong thư mục tạm thời trên Web Server
-    $user_email = $_POST['user_email'];
-    $user_role = $_POST['user_role'];
-    $user_address = $_POST['user_address'];
-
+    $user_email = filterInput($_POST['user_email']);
+    $user_role = filterInput($_POST['user_role']);
+    $user_address = filterInput($_POST['user_address']);
     move_uploaded_file($user_image_temp,"../images/{$user_image}");// chuyển từ chỗ tạm thời sang thư mục ảnh ở root
-    $password = password_hash($password,PASSWORD_BCRYPT,array('cost' => 10));
+    $password = password_hash($password,PASSWORD_BCRYPT,array('cost' => 12));
     $sql = 'INSERT INTO users(username,name,user_role,user_image,user_gmail,password,user_address) 
           VALUES("'.$username.'","'.$name.'","'.$user_role.'","'.$user_image.'","'.$user_email.'", "'.$password.'","'.$user_address.'")';
     $query=mysqli_query($connection,$sql);
@@ -28,7 +27,7 @@ if(isset($_POST['create'])){
        });
        </script>';
     }
-    echo "User created successfully: " . " " ."<a href='../users.php'>View Users</a>";
+    echo "<p class='bg-success'>User created successfully: " . " " ."<a href='../users.php'>View Users</a></p>";
     
 }
 
