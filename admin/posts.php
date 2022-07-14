@@ -14,13 +14,13 @@
                 <div class="col-lg-12">
                     <h1 class="page-header" style="text-align:center; color:#2a789b; font-size:40px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; border-bottom: 1px solid #FFF;">
                         POSTS MANAGEMENT
-                      
+
                     </h1>
 
 
                     <div class="row" style="margin-left: 0; margin-right: 0;">
                         <div class="search" style="float: left; margin-right: 50px;">
-                          
+
                             <form class="form-inline" action="search.php" method="post">
                                 <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search..." aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0" name="submit_search" type="submit"><img src="../front_end/image1/icon-search.png" /></button>
@@ -97,21 +97,26 @@
 
                             <?php
                             if (isset($_GET['delete'])) {
-                                $the_post_id = $_GET['delete'];
-                                $sql = "delete from posts where post_id = {$the_post_id}";
-                                $delete_query = mysqli_query($connection, $sql);
+                                if (isset($_SESSION['user_role'])) {
+                                    if ($_SESSION['user_role'] == 'admin') {
+                                        $the_post_id = $_GET['delete'];
+                                        $sql = "delete from posts where post_id = {$the_post_id}";
+                                        $delete_query = mysqli_query($connection, $sql);
 
-                                echo '
-                <script>
-                swal({
-                    title: "Xoá thành công!",
-                    text: "",
-                    icon: "success",
-                    button: "Ok",
-                });
-                </script>';
-                                header('Location: posts.php');
+                                        echo '
+                                        <script>
+                                        swal({
+                                            title: "Xoá thành công!",
+                                            text: "",
+                                            icon: "success",
+                                            button: "Ok",
+                                        });
+                                        </script>';
+                                        header('Location: posts.php');
+                                    }
+                                }
                             }
+
 
 
 

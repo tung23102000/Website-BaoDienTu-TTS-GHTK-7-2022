@@ -33,7 +33,7 @@ if (isset($_POST['create'])) {
        });
        </script>';
     }
-    echo "User created successfully: " . " " . "<a href='../posts.php'>View Posts</a>";
+    echo "<p class='bg-success'>User created successfully: " . " " . "<a href='../posts.php'>View Posts</a></p>";
 }
 
 ?>
