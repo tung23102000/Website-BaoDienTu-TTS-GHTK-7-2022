@@ -97,7 +97,7 @@ if (isset($_POST['submit']) && $_SESSION['_token'] == $_POST['_token']) {
                     <div class="form-wrap">
                         <h2 style="text-align:center; color:#5495a1;">Change your password</h2>
 
-                        <form role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="login-form" autocomplete="off">
+                        <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
                             <div class="form-group">
                                 <label for="email" class="sr-only">Old password</label>

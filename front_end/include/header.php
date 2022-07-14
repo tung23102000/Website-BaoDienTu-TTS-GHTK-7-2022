@@ -1,5 +1,5 @@
-<?php header("X-Frame-Options: DENY");
-header("Content-Security-Policy: frame-ancestors 'none'", false);?>
+<?php //header("X-Frame-Options: DENY");
+//header("Content-Security-Policy: frame-ancestors 'none'", false);?>
 <?php session_start(); ?>
 <?php include '../database/dbhelper.php'; ?>
 <!DOCTYPE html>
@@ -9,8 +9,6 @@ header("Content-Security-Policy: frame-ancestors 'none'", false);?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://apis.google.com"> -->
-    <!-- ngăn JavaScript nội tuyến thực thi-->
     <title>Inforword</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">

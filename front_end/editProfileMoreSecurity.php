@@ -195,7 +195,7 @@ if (isset($_POST['edit_user'])) {
                 <div class="col-6">
                     <div class="form-wrap">
                         <h2 style="text-align:center; color:#5495a1;">Edit Profile</h2>
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="title">Fullname</label>
                                 <input type="text" value="<?php echo $user_fullname; ?>" class="form-control" name="user_fullname" placeholder="Enter your fullname">
