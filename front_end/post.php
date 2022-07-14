@@ -12,8 +12,6 @@ include 'include/function.php';
             <?php
             if (isset($_GET['p_id'])) {
                 $the_post_id = $_GET['p_id'];
-
-               $the_post_id = mysqli_real_escape_string($connection,$the_post_id);
                $the_post_id = filterInput($the_post_id);
                 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { // nếu ko phải do gửi vào biểu mẫu post ở mục comment thì mới cho tăng biến đếm lượt xem
                     // đơn giản là ta tăng cột lượt xem lên 1 mỗi khi click vào 1 bài cụ thể có id

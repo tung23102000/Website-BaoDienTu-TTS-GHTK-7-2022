@@ -44,7 +44,7 @@ if (isset($_POST['update_post'])) {
     $post_tag         = filterInput($_POST['post_tag']);
     $post_content      = $_POST['post_content'];
     $post_content = mysqli_real_escape_string($connection, $post_content);
-    $post_content = htmlspecialchars($post_content);
+    //$post_content = htmlspecialchars($post_content);
     move_uploaded_file($post_image_temp, "../images/$post_image");
     if (empty($post_image)) {
         // nếu k có ảnh nào đc chọn tức là k thay đổi ảnh cũ thì phải thực hiện bằng cách lấy ảnh từ db
