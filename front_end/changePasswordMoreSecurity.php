@@ -31,7 +31,10 @@ if (isset($_GET['id'])) {
 
 $token = md5(uniqid()); //ID được tạo từ hàm này không đảm bảo tính duy nhất của giá trị trả về nên để tạo một ID cực kỳ khó đoán kèm sử dụng hàm md5 () 
 
-if (isset($_POST['submit']) && $_SESSION['_token'] == $_POST['_token']) {
+if (isset($_POST['submit']) && $_SESSION['token'] == $_POST['_token']) {
+    if(time()>=$_SESSION['token-expire']){
+        echo "Token hết hạn. Vui lòng load lại form.";
+    }else{
     $old_password = $_POST['old_password'];
     $new_password = $_POST['new_password'];
     $rePassword = $_POST['rePassword'];
@@ -83,9 +86,12 @@ if (isset($_POST['submit']) && $_SESSION['_token'] == $_POST['_token']) {
      });
      </script>';
     }
+   }
 }
 
 
+    $_SESSION['token'] = $token;
+    $_SESSION["token-expire"] = time() + 240;         //hạn sử dụng token chỉ trong 4 phút        
 ?>
 <!-- Page Content -->
 <div class="container-fluid">
@@ -112,9 +118,7 @@ if (isset($_POST['submit']) && $_SESSION['_token'] == $_POST['_token']) {
                                 <input type="password" name="rePassword" id="subject" class="form-control" placeholder="Type your new password again" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Mật khẩu phải ít nhất 8 kí tự, gồm ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt">
                             </div>
                             <input type="hidden" name="_token" value="<?php echo $token; ?>" />
-                            <?php
-                            $_SESSION['_token'] = $token;
-                            ?>
+                            
                             <div class="form-group">
                                 <div class="row" style="margin-left:0; justify-content:center;">
                                     <input class="btn btn-success" type="submit" name="submit" value="Submit">

@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
   $rePassword = $_POST['rePassword'];
   if($old_password === $user_password){
     if($rePassword===$new_password){
-        $sql = "UPDATE users SET password = $new_password WHERE user_id = $user_id";
+        $sql = "UPDATE users SET password = '$new_password' WHERE user_id = $user_id";
         $update_query = mysqli_query($connection, $sql);
         if (!$update_query) {
             die("query failed" . mysqli_error($connection));

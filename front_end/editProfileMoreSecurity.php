@@ -58,8 +58,11 @@ $maxfilesize   = 800000;
 
 ////Những loại file được phép upload
 $allowtypes    = array('jpg', 'png', 'jpeg', 'gif','JPG','PNG','JPEG','GIF');
-$token = md5(uniqid());
-if (isset($_POST['edit_user'])) {
+
+if (isset($_POST['edit_user']) && $_SESSION['token']==$_POST['_token']) {
+    if(time()>=$_SESSION['token-expire']){
+        echo "Token hết hạn. Vui lòng load lại form.";
+    } else{
 
     $user_fullname      = $_POST['user_fullname'];
     $username         = $_POST['username'];
@@ -154,7 +157,12 @@ if (isset($_POST['edit_user'])) {
         }
     }
 }
+}
 
+$token = md5(uniqid());
+
+$_SESSION['token'] = $token;
+$_SESSION["token-expire"] = time() + 240;         //hạn sử dụng token chỉ trong 4 phút                                  
 ?>
 <div class="container-fluid">
     <section id="login">
@@ -222,9 +230,7 @@ if (isset($_POST['edit_user'])) {
                                 <input type="text" value="<?php echo $user_address; ?>" class="form-control" name="user_address">
                             </div>
                             <input type="hidden" name="_token" value="<?php echo $token; ?>" />
-                            <?php
-                            $_SESSION['_token'] = $token;
-                            ?>
+                            
                             <div class="form-group">
                                 <div class="row" style="margin-left:0; justify-content:center;">
                                     <input class="btn btn-success" type="submit" name="edit_user" value="Edit User">
