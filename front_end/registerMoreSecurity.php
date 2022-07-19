@@ -21,6 +21,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <body>
     <?php
@@ -30,8 +31,10 @@
         $name = $_POST['name'];
         $rePassword = $_POST['re-password'];
 
-        if (!empty($username) && !empty($password) && !empty($name) && !empty($rePassword)) {
-
+        if (!empty($username) && !empty($password) && !empty($name) && !empty($rePassword) && $_POST['g-recaptcha-response'] != "") {
+            $secret = '6LfMafEgAAAAABdraxCILQkajp_T9HzGjT8MuoKd';
+            $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
+            $responseData = json_decode($verifyResponse);
             $username = mysqli_real_escape_string($connection, $username);
             $password = mysqli_real_escape_string($connection, $password);
             $name = mysqli_real_escape_string($connection, $name);
@@ -144,10 +147,10 @@
                     <label for="username" class="sr-only">Repeat your password</label>
                     <input type="password" name="re-password" id="re-password" class="form-control" placeholder="Enter your password again " pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Mật khẩu phải ít nhất 8 kí tự, gồm ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt">
                 </div>
-
+                <div class="g-recaptcha" data-sitekey="6LfMafEgAAAAAID7t1QVRslSme6eC3GZDkYGN2QW"></div>
                 <button type="submit" name="register" style=" border-radius: 16px;
     margin-top: 15px;">Register</button>
-                <p class="message">Have already an account? <a href="login.php">Login here</a></p>
+                <p class="message">Have already an account? <a href="loginMoreSecurity.php">Login here</a></p>
             </form>
         </div>
     </div>

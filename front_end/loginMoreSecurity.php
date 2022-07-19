@@ -87,12 +87,12 @@
      <h2 style="    color: #306494;
     font-weight: bold; margin-bottom: 40px;">LOGIN FORM</h2>
    
-    <form class="login-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+    <form class="login-form" action="" method="post" >
       <input type="text" placeholder="Enter username" name="username"/>
       <input type="password" placeholder="Enter password" name="password"/>
       <button type="submit" name="login" style=" border-radius: 16px;
     margin-top: 15px;">login</button>
-      <p class="message">Not registered? <a href="register.php">Create an account</a></p>
+      <p class="message">Not registered? <a href="registerMoreSecurity.php">Create an account</a></p>
     </form>
   </div>
 </div>

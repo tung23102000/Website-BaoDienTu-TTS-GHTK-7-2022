@@ -50,7 +50,7 @@ if (isset($_SESSION['name'])) {
         }
         if ($allowUpload == true) {
             move_uploaded_file($post_image_temp, "../admin/images/{$post_image}"); // chuyển từ chỗ tạm thời sang thư mục ảnh ở root
-            //$post_content = strip_tags($post_content);
+            $post_content = strip_tags($post_content,['p','b','u','img']);
              $post_content = mysqli_real_escape_string($connection, $post_content);
             //$post_content = htmlspecialchars($post_content);
             $sql = "INSERT INTO posts(post_title,post_author,post_image,post_content,post_date,post_tag,post_category_id,post_status) 
