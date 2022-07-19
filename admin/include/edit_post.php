@@ -43,6 +43,7 @@ if (isset($_POST['update_post'])) {
     $post_image_temp   = $_FILES['image']['tmp_name']; //File đã upload trong thư mục tạm thời trên Web Server
     $post_tag         = filterInput($_POST['post_tag']);
     $post_content      = $_POST['post_content'];
+    $post_content = strip_tags($post_content,['p','b','u','img']);
     $post_content = mysqli_real_escape_string($connection, $post_content);
     //$post_content = htmlspecialchars($post_content);
     move_uploaded_file($post_image_temp, "../images/$post_image");

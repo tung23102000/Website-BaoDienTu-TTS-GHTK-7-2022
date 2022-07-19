@@ -16,22 +16,25 @@ if (isset($_GET['id'])) {
         } else {
             header('HTTP/1.0 404 Not Found');
             readFile('../error/404.php');
+            include "include/footer.php";
             exit();
         }
     } else {
         header('HTTP/1.0 404 Not Found');
         readFile('../error/404.php');
+        include "include/footer.php";
         exit();
     }
 } else{
     header('HTTP/1.0 404 Not Found');
     readFile('../error/404.php');
+    include "include/footer.php";
     exit();
 }
 
 $token = md5(uniqid()); //ID được tạo từ hàm này không đảm bảo tính duy nhất của giá trị trả về nên để tạo một ID cực kỳ khó đoán kèm sử dụng hàm md5 () 
 
-if (isset($_POST['submit']) && $_SESSION['token'] == $_POST['_token']) {
+if (isset($_POST['submit']) && $_SESSION['token'] === $_POST['_token']) {
     if(time()>=$_SESSION['token-expire']){
         echo "Token hết hạn. Vui lòng load lại form.";
     }else{
