@@ -62,7 +62,7 @@ $maxfilesize   = 800000;
 ////Những loại file được phép upload
 $allowtypes    = array('jpg', 'png', 'jpeg', 'gif','JPG','PNG','JPEG','GIF');
 
-if (isset($_POST['edit_user']) && $_SESSION['token']==$_POST['_token']) {
+if (isset($_POST['edit_user']) && $_SESSION['token']===$_POST['_token']) {
     if(time()>=$_SESSION['token-expire']){
         echo "Token hết hạn. Vui lòng load lại form.";
     } else{
